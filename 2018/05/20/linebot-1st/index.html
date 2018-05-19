@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>架設一個 LineBot 聊天機器人 (上篇) | Ian's blog</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">Ian's blog</a><span class="subtitle">Try hard</span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a></div></nav><div id="header-margin-bar"></div><!-- gallery that comes before the header--><div class="wrapper"><div class="container post-header"><h1>架設一個 LineBot 聊天機器人 (上篇)</h1></div></div><div class="wrapper"><div class="container meta"><div class="post-time">2018-05-20</div><div class="post-tags"><a class="post-tag-link" href="/tags/LineBot/">LineBot</a></div></div></div><article><div class="container post"><p>此篇將會介紹如何使用 Line 的網頁去建立一個 LineBot 聊天機器人。不需撰寫任何程式或架設伺服器，只需要動動小手點擊網頁，把屬於你的 LineBot 設定好，就可以跟你做簡單的對話囉！</p>
+<p>開始吧！</p>
+<hr>
+<h2 id="建立-Line-developer-帳號"><a href="#建立-Line-developer-帳號" class="headerlink" title="建立 Line developer 帳號"></a>建立 Line developer 帳號</h2><p>請先開啟 Line developer 網頁<br><a href="https://developers.line.me/en/" target="_blank" rel="noopener">https://developers.line.me/en/</a></p>
+<p><img src="line-developer-homepage.png" alt="line-developer-homepage"></p>
+<p>接著按右上角的 Log in，登入你的 Line 帳號</p>
+<p><img src="line-login.png" alt="line-login"></p>
+<p>註冊 Developer 帳號</p>
+<p><img src="line-register-developer.png" alt="line-register-developer"></p>
+<p>註冊完就成為 Line 的開發者囉！</p>
+<hr>
+<h2 id="建立一個-provider"><a href="#建立一個-provider" class="headerlink" title="建立一個 provider"></a>建立一個 provider</h2><p>按下 Create provider 或是 Add new provider，來建立的頁面</p>
+<p><img src="line-create-provider.png" alt="line-create-provider"></p>
+<p>輸入你的 provider name 之後按下 Confirm  </p>
+<blockquote>
+<p>這邊的 provider name 不是 LineBot 的名字，而是這個 LineBot 的提供者名稱<br>例如：IanChiu28 開發了一個聊天機器人-小嘴鳥，那這邊的 provider name 就要填 IanChiu28，然後我們的機器人叫做小嘴鳥唷！</p>
+</blockquote>
+<hr>
+<h2 id="建立一個-Messaging-API"><a href="#建立一個-Messaging-API" class="headerlink" title="建立一個 Messaging API"></a>建立一個 Messaging API</h2><p>現在你的畫面應該像這個樣子</p>
+<p><img src="line-provider-page.png" alt="line-provider-page"></p>
+<p>按下右邊的 Messaging API 吧！這就是建立一個機器人的身份囉！</p>
+<p><img src="line-create-channel.png" alt="line-create-channel"></p>
+<p>接著我們一步步說明這頁要怎麼填</p>
+<ul>
+<li>App icon：聊天機器人的大頭照</li>
+<li>App name：聊天機器人的名字</li>
+<li>App description：聊天機器人的簡介</li>
+<li>Plan：選擇 Developer Trail<blockquote>
+<p>Developer Trail 才可以用加值功能，雖然朋友數有限制，但是只是玩具少點人用也沒關係啦！</p>
+</blockquote>
+</li>
+<li>Category：隨便選一個</li>
+<li>Subcategory：隨便選一個</li>
+<li>Email address：填入你的信箱</li>
+</ul>
+<p>完成後大概會像這樣</p>
+<blockquote>
+<p>我怕圖片會有版權問題，小畫家隨便畫一個啦～</p>
+</blockquote>
+<p><img src="line-finish-channel.png" alt="line-finish-channel"></p>
+<p><img src="line-bot-qrcode.png" alt="line-bot-qrcode"></p>
+<p>最後的地方有一個 QR Code 可以讓你用手機加入好友，馬上來掃掃看吧！</p>
+<p><img src="line-add-friend.png" alt="line-add-friend"></p>
+<p>馬上跟他聊天看看吧！</p>
+<p><img src="line-say-hi.png" alt="line-say-hi"></p>
+<p>到這邊為止你已經建立你的聊天機器人囉！</p>
+<hr>
+<h2 id="使用-Line-的後台網頁修改機器人的回話內容"><a href="#使用-Line-的後台網頁修改機器人的回話內容" class="headerlink" title="使用 Line 的後台網頁修改機器人的回話內容"></a>使用 Line 的後台網頁修改機器人的回話內容</h2><p>我們先回到 Line developer 的網頁，進到你剛剛建立的聊天機器人的設定頁面</p>
+<p><img src="line-finish-channel.png" alt="line-finish-channel"></p>
+<p>我們看到最下面 QR Code 的上面一點點的地方，有一個回覆訊息的區塊</p>
+<p><img src="line-web-console-set.png" alt="line-web-console-set"></p>
+<p>點一下 Set message，會到 Line manager 的頁面</p>
+<p><img src="line-web-console-homepage.png" alt="line-web-console-homepage"></p>
+<p>在這個頁面就可以設定回覆的訊息囉！我們通常會用到的地方是訊息那一個區塊</p>
+<p><img src="line-web-console-message.png" alt="line-web-console-message"></p>
+<p>接著我們來試試看關鍵字回應訊息</p>
+<p><img src="line-web-console-keyword-reply.png" alt="line-web-console-keyword-reply"></p>
+<p>按下右上角的新增</p>
+<p><img src="line-web-console-keyword-reply-set.png" alt="line-web-console-keyword-reply-set"></p>
+<p>在代表關鍵字的地方打上你想要的關鍵字，如果關鍵字有可能多個，可以追加關鍵字<br>然後在下方的回覆區塊，可以選擇你想要的回覆方式</p>
+<p><img src="line-web-console-keyword-reply-done.png" alt="line-web-console-keyword-reply-done"></p>
+<p>設定完成，接著趕緊來試試看吧！</p>
+<p><img src="line-try-keyword-reply.png" alt="line-try-keyword-reply"></p>
+<p>可以看到我們打了關鍵字的話，機器人就會回應你剛剛設定的回覆唷～<br>需要注意的是，關鍵字必需要完全符合才可以，向最後一句「安安安」只有部分符合是不會有效果的</p>
+<hr>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>OK～ 我們完成了最基本的聊天機器人囉！<br>完全不需要寫任何的程式，只是在網頁上做一些設定，就可以有一個屬於自己的機器人了。但是想跟朋友講垃圾話的話，關鍵字似乎不太符合我們的需求啊！在平常聊天時要完全符合關鍵字實在是太困難了，所以下一篇將會透過程式的方式做到部分符合的關鍵字回覆功能。有興趣的話，請繼續前往下一篇唷～</p>
+</div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="/atom.xml" target="_blank"><i class="fa fa-rss"></i></a></div><div class="footer">© 2018 <a href="/" rel="nofollow">Ian Chiu</a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
