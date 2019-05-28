@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="7Y0SPAfjlsY5VPf-q_mU8GQxASCyvy_KB41ydzJQVhs" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="此篇將會介紹如何使用 Heroku 架設一台伺服器，作為 LineBot 的 webhook server。使用的語言是 Node.js，只需要在程式內撰寫你的邏輯，便可以讓你的 LineBot 更有智慧的和你聊天唷！ 開始吧！">
+<meta name="keywords" content="LineBot,Node.js,Heroku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="架設一個 LineBot 聊天機器人 (中篇)">
+<meta property="og:url" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/index.html">
+<meta property="og:site_name" content="Ian&#39;s blog">
+<meta property="og:description" content="此篇將會介紹如何使用 Heroku 架設一台伺服器，作為 LineBot 的 webhook server。使用的語言是 Node.js，只需要在程式內撰寫你的邏輯，便可以讓你的 LineBot 更有智慧的和你聊天唷！ 開始吧！">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/heroku.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/heroku-homepage.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/create-new-app-menu.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/create-new-app-form.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/go-to-project-folder.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/npm-init.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/express-homepage.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/heroku-deploy.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/deploy-heroku-git.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/heroku-topbar.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/webhook-simple-code.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/app-include-code.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/npm-start.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/remove-json-parser.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/channel-id-secret.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/channel-access-token.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/webhook-url.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/ngrok.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/ngrok-setup.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/ngrok-running.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/enable-webhook-and-set-url.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/test-1.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/disable-auto-reply.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/test-2.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/verify-webhook-url.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/test-3.png">
+<meta property="og:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/test-4.png">
+<meta property="og:updated_time" content="2019-05-28T10:37:35.968Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="架設一個 LineBot 聊天機器人 (中篇)">
+<meta name="twitter:description" content="此篇將會介紹如何使用 Heroku 架設一台伺服器，作為 LineBot 的 webhook server。使用的語言是 Node.js，只需要在程式內撰寫你的邏輯，便可以讓你的 LineBot 更有智慧的和你聊天唷！ 開始吧！">
+<meta name="twitter:image" content="http://ianchiu28.github.io/2019/05/28/linebot-2nd/heroku.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://ianchiu28.github.io/2019/05/28/linebot-2nd/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>架設一個 LineBot 聊天機器人 (中篇) | Ian's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Try hard</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首頁</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />歸檔</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ianchiu28.github.io/2019/05/28/linebot-2nd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ian Chiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">架設一個 LineBot 聊天機器人 (中篇)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-05-28 16:40:48 / 修改時間：18:37:35" itemprop="dateCreated datePublished" datetime="2019-05-28T16:40:48+08:00">2019-05-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/28/linebot-2nd/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/05/28/linebot-2nd/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/05/28/linebot-2nd/" class="leancloud_visitors" data-flag-title="架設一個 LineBot 聊天機器人 (中篇)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">閱讀次數：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>此篇將會介紹如何使用 Heroku 架設一台伺服器，作為 LineBot 的 webhook server。使用的語言是 Node.js，只需要在程式內撰寫你的邏輯，便可以讓你的 LineBot 更有智慧的和你聊天唷！</p>
+<p>開始吧！</p>
+<hr>
+<a id="more"></a>
+<h1 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h1><p>此篇文章會需要用到 Node.js 和 Git，請務必先下載和安裝好哦～<br>Node.js: <a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a><br>Git: <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
+<hr>
+<h1 id="架設一台-Heroku-伺服器"><a href="#架設一台-Heroku-伺服器" class="headerlink" title="架設一台 Heroku 伺服器"></a>架設一台 Heroku 伺服器</h1><h2 id="什麼是-Heroku"><a href="#什麼是-Heroku" class="headerlink" title="什麼是 Heroku ?"></a>什麼是 Heroku ?</h2><p><img src="heroku.png" alt="heroku"></p>
+<blockquote>
+<p>URL: <a href="https://www.heroku.com/" target="_blank" rel="noopener">https://www.heroku.com/</a></p>
+</blockquote>
+<p>Heroku 是一個租用伺服器的雲端服務，我們可以租用伺服器來執行我們撰寫的程式。他就像是 AWS、Azure、GCP 等等的雲端服務大廠，而 Heroku 有提供我們一些免費配額讓我們租用一些小伺服器，雖然這些小伺服器會受到一些限制，但是要用來玩玩看 LineBot 已經很足夠了哦！</p>
+<p>關於 Heroku 的免費配額請參考他們的官方網站：<a href="https://devcenter.heroku.com/articles/free-dyno-hours" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/free-dyno-hours</a></p>
+<h2 id="註冊"><a href="#註冊" class="headerlink" title="註冊"></a>註冊</h2><p>註冊我想應該就不用多做說明了，就到 Heroku 的網頁上註冊吧～</p>
+<h2 id="開啟一台伺服器"><a href="#開啟一台伺服器" class="headerlink" title="開啟一台伺服器"></a>開啟一台伺服器</h2><p>首先我們先登入 Heroku！<br><img src="heroku-homepage.png" alt="heroku-homepage"></p>
+<p>接著我們點選右上角的 New → Create new app 來開啟一台伺服器。<br><img src="create-new-app-menu.png" alt="create-new-app-menu"></p>
+<p>填入這台伺服器的資料，區域的話隨便吧，速度應該不會差太多～<br><img src="create-new-app-form.png" alt="create-new-app-form"></p>
+<p>這樣就開啟一台伺服器囉！是不是超級簡單啊～<br>不過，現在只是有一台伺服器擺在那裡，但我們不知道他是不是活的好好的。<br>所以我們要寫一個非常簡單的程式，讓我們可以知道這台伺服器運行的好好的哦～</p>
+<h2 id="寫一個基本-Node-js-程式"><a href="#寫一個基本-Node-js-程式" class="headerlink" title="寫一個基本 Node.js 程式"></a>寫一個基本 Node.js 程式</h2><p>在一個你喜歡的地方開一個資料夾，名字取你喜歡的就好了，這個資料夾就是拿來放我們的伺服器程式的地方哦！我在這邊取名為 LineBotBlueStar。</p>
+<p>然後使用 cmd(註1) 進到你的資料夾(註2)吧，我們來做 Node.js 的初始化。</p>
+<blockquote>
+<p>註1 cmd = windows 的命令提示字元。<br>註2 假設 LineBotBlueStar 資料夾放在 D 槽底下的 GitHub 資料夾 內，你可以這樣下指令。<br>    <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> D:</span><br><span class="line"><span class="meta">&gt;</span> cd GitHub\LineBotBlueStar</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>  <img src="go-to-project-folder.png" alt="go-to-project-folder"></p>
+</blockquote>
+<p>接著，下指令 <code>npm init -y</code>(註3)。<br><img src="npm-init.png" alt="npm-init"></p>
+<blockquote>
+<p>註3 -y 只是因為我懶得輸入一些資訊，想輸入專案資訊的話，可以下 npm init 就可以了哦。</p>
+</blockquote>
+<p>再來，為了簡化過程，我們使用 Node.js 中的 Express，幫助我們建立伺服器的資料架構。<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> npm i -g express-generator</span><br><span class="line"><span class="meta">&gt;</span> express --view=pug</span><br><span class="line">// 接著它會問問題，請輸入y。</span><br><span class="line">destination is not empty, continue? [y/N] y</span><br></pre></td></tr></table></figure></p>
+<p>到這邊為止，你可以看到你的 LineBot 資料夾已經多了文件夾和檔案囉，這麼多檔案代表什麼意思呢？還不用緊張，後面會再慢慢提到，我們先讓伺服器動起來吧！<br>最後，再下一個指令，幫該安裝的 module 全部裝起來！這個指令可能會跑一小段時間哦～<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> npm install</span><br></pre></td></tr></table></figure></p>
+<p>現在我們先在我們的電腦上測試一下伺服器是不是都好了，下指令讓程式跑起來！<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> npm start</span><br><span class="line">// 此時你的 cmd 會沒辦法再輸入任何指令，這是正確的哦！</span><br></pre></td></tr></table></figure></p>
+<p>再來開你的瀏覽器，輸入網址 <a href="http://localhost:3000，如果有看到" target="_blank" rel="noopener">http://localhost:3000，如果有看到</a> Express 的畫面，就代表我們成功囉！<br><img src="express-homepage.png" alt="express-homepage"></p>
+<p>如果想停掉程式，回到 cmd 上按下 Ctrl + C，就可以停掉程式囉！</p>
+<h2 id="把程式放到伺服器上"><a href="#把程式放到伺服器上" class="headerlink" title="把程式放到伺服器上"></a>把程式放到伺服器上</h2><p>現在我們有伺服器、有程式，接著就是讓他們合體！好啦，其實是把程式上傳到伺服器，讓他執行起來。<br>怎麼做呢？其實方法有很多，Heroku 的網站也都有教，請看到你的專案的 deploy 頁面<br><img src="heroku-deploy.png" alt="heroku-deploy"></p>
+<p>deployment method 列出了上傳的一些方法，可以自己選擇一種來用～<br>筆者在此篇文章選用第一種 Deploy using Heroku Git<br><img src="deploy-heroku-git.png" alt="deploy-heroku-git"></p>
+<p>我們就按照網頁寫的步驟來做吧！第一步先下載並安裝 Heroku CLI<br>安裝好後，然後輸入指令<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> Heroku login</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果你剛安裝完 Heroku CLI，馬上就下指令，可能會遇到 Heroku 指令不能辨識的問題。處理方式也很簡單，關掉 cmd 重新開一個就可以囉！記得要下指令回到 LineBot 資料夾哦！</p>
+</blockquote>
+<p>接著，我們繼續按照網頁下指令，先進到你的 LineBot 資料夾，再下指令<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> git init</span><br><span class="line"><span class="meta">&gt;</span> heroku git:remote -a linebot-bluestar // 記得要換成你的 LineBot 名字</span><br><span class="line">// 完成後你會看到 "set git remote heroku to https://git.heroku.com/linebot-bluestar.git" 的文字哦！</span><br></pre></td></tr></table></figure></p>
+<p>再來，部屬我們的程式上伺服器吧！<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> git add . (這個指令會一段時間)</span><br><span class="line"><span class="meta">&gt;</span> git commit -am "make it better"</span><br><span class="line"><span class="meta">&gt;</span> git push heroku master</span><br></pre></td></tr></table></figure></p>
+<p>完成！趕緊來看一下伺服器是不是成功了！<br>在 Heroku 網頁上的右上角，有一個 Open app 的按鈕，按下去看看是不是也可以看到 Express 呢？如果有，那你成功囉！<br><img src="heroku-topbar.png" alt="heroku-topbar"></p>
+<p>到這邊為止，你已經成功搭建一台伺服器，並在上面執行了 Node.js 程式了！</p>
+<hr>
+<h1 id="撰寫-LineBot-程式"><a href="#撰寫-LineBot-程式" class="headerlink" title="撰寫 LineBot 程式"></a>撰寫 LineBot 程式</h1><h2 id="安裝-LineBot-module"><a href="#安裝-LineBot-module" class="headerlink" title="安裝 LineBot module"></a>安裝 LineBot module</h2><p>首先我們會使用到 Node.js 中的 linebot 這個 module，先來下載它吧！<br>一樣到你的 LineBot 資料夾內下指令<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> npm i -S linebot</span><br></pre></td></tr></table></figure></p>
+<h2 id="在-Express-建立-Webhook-程式檔案"><a href="#在-Express-建立-Webhook-程式檔案" class="headerlink" title="在 Express 建立 Webhook 程式檔案"></a>在 Express 建立 Webhook 程式檔案</h2><p>還記得我們使用了 Express 來幫助我們建立這個專案的檔案結構嗎？這邊簡單介紹一下～<br>當我們運行這隻程式的時候，會率先執行 app.js 這隻檔案，接著在看 app.js 裡面是怎麼寫的，再來決定去執行哪些檔案哦！<br>我們要做的是在 routes 這個資料夾內建立一個 webhook.js，並設定 app.js 去串接這支 webhook.js。<br>如此一來，我們就可以在 webhook.js 裡面寫所有 LineBot 的邏輯了！</p>
+<p>那就開始吧！進到 routes 新增一支檔案取名為 webhook.js。然後打開 webhook.js，寫入以下程式碼：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'webhook.js is working'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure></p>
+<p><img src="webhook-simple-code.png" alt="webhook-simple-code"></p>
+<p>再來打開 app.js，我們要寫入以下程式碼，讓他可以串接這支 webhook.js：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> webhookRouter = <span class="built_in">require</span>(<span class="string">'./routes/webhook'</span>);</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">'/webhook'</span>, webhookRouter);</span><br></pre></td></tr></table></figure></p>
+<p>這兩行要寫在哪裡呢，找跟他們長很像的地方寫上去吧，就像下圖紅框處的位置<br><img src="app-include-code.png" alt="app-include-code"></p>
+<p>到這邊我們先測試一下是否成功，下指令<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> npm start</span><br><span class="line">// 如果有看到 "webhook.js is working" 就成功囉！</span><br></pre></td></tr></table></figure></p>
+<p><img src="npm-start.png" alt="npm-start"></p>
+<h2 id="撰寫-LineBot-邏輯"><a href="#撰寫-LineBot-邏輯" class="headerlink" title="撰寫 LineBot 邏輯"></a>撰寫 LineBot 邏輯</h2><p>這階段我們終於要來寫 LineBot 的邏輯啦！</p>
+<p>首先我們要先移除掉 app.js 中解析 JSON 的程式碼，不然 LineBot 丟過來的訊息就會先被解析過，這樣我們的程式就沒辦法運作了。</p>
+<p>要移除的程式碼只有一行，就是 <code>app.use(express.json());</code>。<br>我們可以很簡單的把這行刪除掉，或是把它註解掉，如下圖。<br><img src="remove-json-parser.png" alt="remove-json-parser"></p>
+<p>再來我希望 LineBot 能回應我打給它的字，所以把 webhook.js 改成這樣：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'webhook.js is working'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// linebot module</span></span><br><span class="line"><span class="keyword">var</span> linebot = <span class="built_in">require</span>(<span class="string">'linebot'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// linebot information</span></span><br><span class="line"><span class="keyword">var</span> bot = linebot(&#123;</span><br><span class="line">  channelId: <span class="string">'YOUR_CHANNEL_ID'</span>,</span><br><span class="line">  channelSecret: <span class="string">'YOUR_CHANNEL_SECRET'</span>,</span><br><span class="line">  channelAccessToken: <span class="string">'YOUR_CHANNEL_ACCESS_TOKEN'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// linebot message event</span></span><br><span class="line">bot.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> userInput = event.message.text;</span><br><span class="line">    <span class="keyword">var</span> botReply = <span class="string">'你剛剛說了: '</span> + userInput;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// reply to user</span></span><br><span class="line">    event.reply(botReply).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// if reply success</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Reply: '</span>, message);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// if something went wrong</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Error: '</span>, error)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> linebotParser = bot.parser();</span><br><span class="line">router.post(<span class="string">'/'</span>, linebotParser);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure></p>
+<p>這邊會看到 linebot information 那邊要輸入 3 組類似代碼的東西，我們可以透過 Line Developers 後台取得 (<a href="https://developers.line.me/console/)。" target="_blank" rel="noopener">https://developers.line.me/console/)。</a><br>到 Line 的後台網頁搜尋吧！</p>
+<p>我們可以在 Basic information 中找到 Channel ID 和 Channel secret。<br><img src="channel-id-secret.png" alt="channel-id-secret"></p>
+<p>接著在 Messaging settings 中找到 Channel access token。<br><img src="channel-access-token.png" alt="channel-access-token"></p>
+<p>比較特別的是 Channel access token 一開始是空白的，要按右方的 issue 來產生一組新的 token 哦！<br>由於我們是第一次產生，token 要多久過期的問題設定 0 小時就可以了。<br>把三組代碼都填入程式碼內，就完成最簡單的邏輯囉！</p>
+<h2 id="在本地端測試-LineBot"><a href="#在本地端測試-LineBot" class="headerlink" title="在本地端測試 LineBot"></a>在本地端測試 LineBot</h2><p>這時候我們會心想：「剛剛把程式都寫好了，要趕緊來測試一下了，我們趕快把程式跟 LineBot 串接在一起吧！」<br>這時看到 LineBot 的串接的地方如何設定，會發現 LineBot 的串接需要有 HTTPS 的網址，而我們本地端的電腦正常來說不會有一個 HTTPS 的網址啊！<br><img src="webhook-url.png" alt="webhook-url"></p>
+<p>這時要使用一個服務 ngrok (<a href="https://ngrok.com/)。它能夠讓本地端的電腦，暫時有一個" target="_blank" rel="noopener">https://ngrok.com/)。它能夠讓本地端的電腦，暫時有一個</a> HTTPS 的網址，至於細節怎麼做到就不說了，來看看怎麼用吧！</p>
+<h3 id="註冊和下載-ngrok"><a href="#註冊和下載-ngrok" class="headerlink" title="註冊和下載 ngrok"></a>註冊和下載 ngrok</h3><p>到 ngrok 的官網，按下 Get started for free，然後註冊一個帳號。<br><img src="ngrok.png" alt="ngrok"></p>
+<p>接著會到一個教你如何安裝的頁面，按照教學下載檔案、解壓縮檔案和連結帳號。<br><img src="ngrok-setup.png" alt="ngrok-setup"></p>
+<h3 id="連結帳號"><a href="#連結帳號" class="headerlink" title="連結帳號"></a>連結帳號</h3><p>連結帳號這個步驟可能會有點難，步驟如下：</p>
+<ol>
+<li>先確定剛剛下載的檔案，解壓縮後放在哪裡，例如我放在 D:\ngrok-stable-windows-amd64\ngrok.exe。</li>
+<li><p>開另外一個 cmd 進入到剛剛下載的 ngrok.exe 放的資料夾位置。</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> D:</span><br><span class="line"><span class="meta">&gt;</span> cd ngrok-stable-windows-amd64</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>輸入連結帳號的指令。</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> ngrok authtoken YOUR_TOKEN_ON_WEB</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>看到 “Authtoken saved to configuration file” 就代表成功了！</p>
+</li>
+</ol>
+<h3 id="使用-ngrok-建立本地端-HTTPS-伺服器"><a href="#使用-ngrok-建立本地端-HTTPS-伺服器" class="headerlink" title="使用 ngrok 建立本地端 HTTPS 伺服器"></a>使用 ngrok 建立本地端 HTTPS 伺服器</h3><p>我們要開始使用 ngrok 來建立本地端 HTTPS 伺服器囉！</p>
+<p>首先我們要準備兩個 cmd 視窗，一個進到 LineBot 的資料夾，另一個進到 ngrok 的資料夾。<br>我們先用第一個 cmd 把 Node.js 執行起來，還記得嗎？指令 <code>npm start</code>。<br>再用另一個 cmd 執行 ngrok，把我們的 Node.js 伺服器變成 HTTPS 伺服器。<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> ngrok http 3000</span><br><span class="line">// 因為我們 Node.js 的 port 預設是使用 3000，所以不像是 ngrok 教學中寫的 80</span><br></pre></td></tr></table></figure></p>
+<p><img src="ngrok-running.png" alt="ngrok-running"></p>
+<p>這邊要注意一點，順序不能錯！一定要先執行 Node.js，再用 ngrok 改成 HTTPS 伺服器！<br>然後我們試試看 ngrok 給我們的網址，像我這次得到的是 <a href="https://5381cacc.ngrok.io。" target="_blank" rel="noopener">https://5381cacc.ngrok.io。</a><br>丟到瀏覽器上執行，如果有看到 Express 就代表成功囉！</p>
+<h3 id="跟-Line-串接在一起測試"><a href="#跟-Line-串接在一起測試" class="headerlink" title="跟 Line 串接在一起測試"></a>跟 Line 串接在一起測試</h3><p>我們回到 Line Developers 後台，把 Use webhooks 改成 Enabled，並在 Webhook URL 的地方填上網址，網址請輸入 “ngrok 給的網址/webhook”，例如筆者這次就要填入 “5381cacc.ngrok.io/webhook”。<br><img src="enable-webhook-and-set-url.png" alt="enable-webhook-and-set-url"></p>
+<p>為什麼後面要多加 /webhook 呢？因為我們的 app.js 裡面有寫到 <code>app.use(&#39;/webhook&#39;, webhookRouter);</code>，這樣 LineBot 才能順利的使用我們 webhook.js 裡面寫的邏輯。</p>
+<p>填寫完 webhook 的網址後，記得要按右方的 Verify 去驗證，看到 Success 之後，LineBot 就會把它收到的訊息丟到伺服器裡面囉！</p>
+<p>事不宜遲，來測試看看吧！用 Line 對你的 LineBot 說句話看看！<br><img src="test-1.png" alt="test-1"></p>
+<p>LineBot 有正確執行囉！但是要怎麼去掉那個基本回覆呢？很簡單，到 Line 的後台把 Auto-reply messages 關掉就可以囉！<br><img src="disable-auto-reply.png" alt="disable-auto-reply"></p>
+<p>再測試一次看看吧！<br><img src="test-2.png" alt="test-2"></p>
+<hr>
+<h1 id="跟讓-Heroku-伺服器與-Line-串接在一起"><a href="#跟讓-Heroku-伺服器與-Line-串接在一起" class="headerlink" title="跟讓 Heroku 伺服器與 Line 串接在一起"></a>跟讓 Heroku 伺服器與 Line 串接在一起</h1><p>終於到了這個階段了！我們目前有一台運作正常的 Heroku 伺服器，還有運作正常的程式碼。接下來就是再它們合體了。來吧！最後一步了！</p>
+<h2 id="部屬程式到-Heroku-上面"><a href="#部屬程式到-Heroku-上面" class="headerlink" title="部屬程式到 Heroku 上面"></a>部屬程式到 Heroku 上面</h2><p>這邊的動作其實我們稍早已經做過一次了，不會太難！<br>打開一個新的 cmd，進入到 LineBot 的資料夾，輸入指令<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> heroku login</span><br><span class="line"><span class="meta">&gt;</span> git add .</span><br><span class="line"><span class="meta">&gt;</span> git commit -am "line bot first submit"</span><br><span class="line"><span class="meta">&gt;</span> git push heroku master</span><br></pre></td></tr></table></figure></p>
+<p>完成了之後，一樣可以點選 Open app 看看伺服器是否運作正常。</p>
+<h2 id="修改-Line-後台-Webhook-URL"><a href="#修改-Line-後台-Webhook-URL" class="headerlink" title="修改 Line 後台 Webhook URL"></a>修改 Line 後台 Webhook URL</h2><p>接著我們到 Line Developers 的後台網頁，修改 Webhook URL，改成 Heroku 的網址。<br>Heroku 的網址怎麼看？很簡單，按下 Open app 之後，瀏覽器上的網址就是 Heroku 的網址了！</p>
+<p>修改完 URL 之後，別忘記也要按 Verify 測試一下！<br><img src="verify-webhook-url.png" alt="verify-webhook-url"></p>
+<p>最後用 Line 測試看看<br><img src="test-3.png" alt="test-3"></p>
+<p>完成！現在 LineBot 已經和 Heroku 伺服器上的程式串接在一起了！</p>
+<hr>
+<h1 id="再次修改程式邏輯"><a href="#再次修改程式邏輯" class="headerlink" title="再次修改程式邏輯"></a>再次修改程式邏輯</h1><p>我們再次修改一下程式的邏輯，改成判斷使用者輸入的文字，來決定回覆的訊息吧！<br>回到 webhook.js。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// linebot message event</span></span><br><span class="line">bot.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> userInput = event.message.text;</span><br><span class="line">    <span class="keyword">var</span> botReply;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (userInput.includes(<span class="string">'你'</span>) &amp;&amp; userInput.includes(<span class="string">'誰'</span>)) &#123;</span><br><span class="line">        botReply = <span class="string">'我是藍藍星星！'</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        botReply = <span class="string">'你剛剛說了: '</span> + userInput;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// reply to user</span></span><br><span class="line">    event.reply(botReply).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// if reply success</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Reply: '</span>, message);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// if something went wrong</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Error: '</span>, error)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>只要使用者的文字中，同時包含了 “你” 和 “誰”，LineBot 就會回覆 “我是藍藍星星！”。<br>我們部屬到 Heroku 上試試看吧！指令就不再說了哦～<br><img src="test-4.png" alt="test-4"></p>
+<hr>
+<h1 id="一些小提醒"><a href="#一些小提醒" class="headerlink" title="一些小提醒"></a>一些小提醒</h1><p>當你部屬上 Heroku 之後，就不會在需要用到 ngrok 囉。不過它仍然是你本地端測試的利器，畢竟不可能天天沒 bug 嘛～ 出現 bug 的時候，你就會需要搭配 ngrok 來測試囉！記得用 ngrok 時，要去修改 Line 後台的 Webhook URL。</p>
+<p>關於 LineBot 邏輯的部分，可以參考 linebot 這個 module。它還有除了 message 的 event 可以串接，可以好好拜讀一下文件，寫出更酷的 LineBot 邏輯！<br>URL: <a href="https://www.npmjs.com/package/linebot" target="_blank" rel="noopener">https://www.npmjs.com/package/linebot</a></p>
+<hr>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>這篇文章寫了很多設定相關的教學，反而程式邏輯的部分都沒寫到多少。不過我認為最難、最容易卡住的就是設定了。我想設定都完成的話，接下來邏輯就是改改程式就好囉！而且程式正是我們該發揮創意的地方呀！</p>
+<p>如果過程中遇到什麼地方卡住了，歡迎留言一起討論哦！</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LineBot/" rel="tag"># LineBot</a>
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/Heroku/" rel="tag"># Heroku</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/20/linebot-1st/" rel="next" title="架設一個 LineBot 聊天機器人 (上篇)">
+                <i class="fa fa-chevron-left"></i> 架設一個 LineBot 聊天機器人 (上篇)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ian Chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">文章</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">標籤</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事前準備"><span class="nav-number">1.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#架設一台-Heroku-伺服器"><span class="nav-number">2.</span> <span class="nav-text">架設一台 Heroku 伺服器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-Heroku"><span class="nav-number">2.1.</span> <span class="nav-text">什麼是 Heroku ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註冊"><span class="nav-number">2.2.</span> <span class="nav-text">註冊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開啟一台伺服器"><span class="nav-number">2.3.</span> <span class="nav-text">開啟一台伺服器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寫一個基本-Node-js-程式"><span class="nav-number">2.4.</span> <span class="nav-text">寫一個基本 Node.js 程式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把程式放到伺服器上"><span class="nav-number">2.5.</span> <span class="nav-text">把程式放到伺服器上</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#撰寫-LineBot-程式"><span class="nav-number">3.</span> <span class="nav-text">撰寫 LineBot 程式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝-LineBot-module"><span class="nav-number">3.1.</span> <span class="nav-text">安裝 LineBot module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Express-建立-Webhook-程式檔案"><span class="nav-number">3.2.</span> <span class="nav-text">在 Express 建立 Webhook 程式檔案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撰寫-LineBot-邏輯"><span class="nav-number">3.3.</span> <span class="nav-text">撰寫 LineBot 邏輯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在本地端測試-LineBot"><span class="nav-number">3.4.</span> <span class="nav-text">在本地端測試 LineBot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#註冊和下載-ngrok"><span class="nav-number">3.4.1.</span> <span class="nav-text">註冊和下載 ngrok</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#連結帳號"><span class="nav-number">3.4.2.</span> <span class="nav-text">連結帳號</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ngrok-建立本地端-HTTPS-伺服器"><span class="nav-number">3.4.3.</span> <span class="nav-text">使用 ngrok 建立本地端 HTTPS 伺服器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跟-Line-串接在一起測試"><span class="nav-number">3.4.4.</span> <span class="nav-text">跟 Line 串接在一起測試</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跟讓-Heroku-伺服器與-Line-串接在一起"><span class="nav-number">4.</span> <span class="nav-text">跟讓 Heroku 伺服器與 Line 串接在一起</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#部屬程式到-Heroku-上面"><span class="nav-number">4.1.</span> <span class="nav-text">部屬程式到 Heroku 上面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-Line-後台-Webhook-URL"><span class="nav-number">4.2.</span> <span class="nav-text">修改 Line 後台 Webhook URL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#再次修改程式邏輯"><span class="nav-number">5.</span> <span class="nav-text">再次修改程式邏輯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些小提醒"><span class="nav-number">6.</span> <span class="nav-text">一些小提醒</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#結語"><span class="nav-number">7.</span> <span class="nav-text">結語</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ian Chiu</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 強力驅動 v3.6.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://ianchiu28-github-io.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://ianchiu28.github.io/2019/05/28/linebot-2nd/';
+        this.page.identifier = '2019/05/28/linebot-2nd/';
+        this.page.title = '架設一個 LineBot 聊天機器人 (中篇)';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ianchiu28-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("fUjicqXJx0jWTrUhxPEA1L6L-gzGzoHsz", "tiAlnz29QPY4i1M2KtN4L5kI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
