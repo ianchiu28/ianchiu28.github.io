@@ -20,4 +20,22 @@
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://ianchiu28.github.io/posts/line-bot-2nd/</loc>
+    <lastmod>2018-06-13T12:54:03+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ianchiu28.github.io/posts/line-bot-1st/</loc>
+    <lastmod>2018-05-23T18:12:11+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ianchiu28.github.io/posts/line-bot-intro/</loc>
+    <lastmod>2018-05-19T19:24:42+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
