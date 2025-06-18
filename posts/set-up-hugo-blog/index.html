@@ -102,7 +102,7 @@
     
     
     "mainEntityOfPage": "true",
-    "wordCount": "346"
+    "wordCount": "351"
   }]
   </script>
 
@@ -432,7 +432,7 @@
 <div class="flex flex-row flex-wrap items-center">
   
   
-  <time datetime="2025-06-17T21:45:56&#43;08:00">2025 June 17</time><span class="px-2 text-primary-500">&middot;</span><span>346 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">2 mins</span>
+  <time datetime="2025-06-17T21:45:56&#43;08:00">2025 June 17</time><span class="px-2 text-primary-500">&middot;</span><span>351 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">2 mins</span>
   
 
   
@@ -867,7 +867,7 @@ baseURL = &#34;https://ianchiu28.github.io&#34;
     
 </h3>
 <p>我部屬到 GitHub Page 後，有遇到 integrity 問題。找了一下，可能是 build 的時候有壓縮或是什麼導致的。目前沒有看到很好的解法，也找不到 Hugo/Blowfish 有關閉 integrity config 的方法</p>
-<p>現況是找到 <code>/theme/blowfish/layouts/partials/head.html</code>，找到有 integrity 的地方都把他砍掉，然後重新用 hugo build 靜態網頁即可
+<p>現況是找到 <code>/theme/blowfish/layouts/partials/head.html</code>，找到有 integrity 的地方都把他砍掉。以及 <code>/theme/blowfish/layouts/partials/vendor.html</code>，把 jQuery 的 integrity 砍掉。然後重新用 hugo build 靜態網頁即可～
 
 
 
