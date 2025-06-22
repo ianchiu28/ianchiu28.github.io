@@ -9,7 +9,37 @@
     <managingEditor>ian.yenchia.chiu@gmail.com (Ian Chiu)</managingEditor>
     <webMaster>ian.yenchia.chiu@gmail.com (Ian Chiu)</webMaster>
     <copyright>© 2025 Ian Chiu</copyright>
-    <atom:link href="https://ianchiu28.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 17 Jun 2025 21:45:56 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Blog</title>
+      <link>https://ianchiu28.github.io/tags/blog/</link>
+      <pubDate>Tue, 17 Jun 2025 21:45:56 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/tags/blog/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Blowfish</title>
+      <link>https://ianchiu28.github.io/tags/blowfish/</link>
+      <pubDate>Tue, 17 Jun 2025 21:45:56 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/tags/blowfish/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://ianchiu28.github.io/tags/hugo/</link>
+      <pubDate>Tue, 17 Jun 2025 21:45:56 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/tags/hugo/</guid>
+      <description></description>
+      
+    </item>
     
   </channel>
 </rss>

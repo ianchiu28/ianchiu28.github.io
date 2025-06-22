@@ -18,7 +18,7 @@
       <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
       <guid>https://ianchiu28.github.io/posts/set-up-hugo-blog/</guid>
       <description></description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/set-up-hugo-blog/set-up-hugo-blog-cover.png" />
     </item>
     
     <item>
@@ -28,7 +28,7 @@
       <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
       <guid>https://ianchiu28.github.io/posts/line-bot-2nd/</guid>
       <description></description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/line-bot-2nd/line-bot-2nd-cover.png" />
     </item>
     
     <item>
@@ -38,7 +38,7 @@
       <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
       <guid>https://ianchiu28.github.io/posts/line-bot-1st/</guid>
       <description></description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/line-bot-1st/line-bot-1st-cover.png" />
     </item>
     
     <item>
@@ -48,7 +48,7 @@
       <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
       <guid>https://ianchiu28.github.io/posts/line-bot-intro/</guid>
       <description></description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/line-bot-intro/line-bot-intro-cover.png" />
     </item>
     
   </channel>
