@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Line-Bot on Ian&#39;s blog</title>
+    <link>https://ianchiu28.github.io/tags/line-bot/</link>
+    <description>Recent content in Line-Bot on Ian&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>ian.yenchia.chiu@gmail.com (Ian Chiu)</managingEditor>
+    <webMaster>ian.yenchia.chiu@gmail.com (Ian Chiu)</webMaster>
+    <copyright>© 2025 Ian Chiu</copyright>
+    <lastBuildDate>Wed, 13 Jun 2018 12:54:03 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/tags/line-bot/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>架設一個 LineBot 聊天機器人 (下篇)</title>
+      <link>https://ianchiu28.github.io/posts/line-bot-2nd/</link>
+      <pubDate>Wed, 13 Jun 2018 12:54:03 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/posts/line-bot-2nd/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/line-bot-2nd/line-bot-2nd-cover.png" />
+    </item>
+    
+    <item>
+      <title>架設一個 LineBot 聊天機器人 (上篇)</title>
+      <link>https://ianchiu28.github.io/posts/line-bot-1st/</link>
+      <pubDate>Wed, 23 May 2018 18:12:11 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/posts/line-bot-1st/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/line-bot-1st/line-bot-1st-cover.png" />
+    </item>
+    
+    <item>
+      <title>架設一個 LineBot 聊天機器人</title>
+      <link>https://ianchiu28.github.io/posts/line-bot-intro/</link>
+      <pubDate>Sat, 19 May 2018 19:24:42 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/posts/line-bot-intro/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/line-bot-intro/line-bot-intro-cover.png" />
+    </item>
+    
+  </channel>
+</rss>

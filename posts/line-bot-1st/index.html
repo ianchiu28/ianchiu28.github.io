@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="scroll-smooth" data-default-appearance="light"
+<html lang="en" dir="ltr" class="scroll-smooth" data-default-appearance="dark"
   data-auto-appearance="true"><head>
   <meta charset="utf-8" />
   
@@ -12,7 +12,7 @@
   <meta name="title" content="架設一個 LineBot 聊天機器人 (上篇) &middot; Ian&#39;s blog" />
   
   
-  
+  <meta name="keywords" content="line-bot, " />
   
   
   <link rel="canonical" href="https://ianchiu28.github.io/posts/line-bot-1st/" />
@@ -26,7 +26,7 @@
   
   
   
-  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.523389cfdec2a79f5be27d6cbea82e5bc6c3306699d3cd42adcc1b62b1d72b66790ce88c76e2210c8db8370f0c9a8e58bcdd8e3ebdcd598c58a4e384fde7c276.css"/>
+  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.5534ca14bd9c95786e0a70108bda44fafe55eb0f8e3025f34e4562ee549a8f010eb155b83bb4834945694ee0c82a5b20154000d3e286119b6bb22b67492fa437.css"/>
   
   
   <script type="text/javascript" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"></script>
@@ -70,6 +70,7 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2018-05-23T18:12:11+08:00">
     <meta property="article:modified_time" content="2018-05-23T18:12:11+08:00">
+    <meta property="article:tag" content="Line-Bot">
     <meta property="og:image" content="https://ianchiu28.github.io/posts/line-bot-1st/line-bot-1st-cover.png">
 
   
@@ -101,10 +102,10 @@
     
     "dateModified": "2018-05-23T18:12:11\u002b08:00",
     
-    
+    "keywords": ["line-bot"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1"
+    "wordCount": "125"
   }]
   </script>
 
@@ -488,7 +489,7 @@
 <div class="flex flex-row flex-wrap items-center">
   
   
-  <time datetime="2018-05-23T18:12:11&#43;08:00">2018 May 23</time><span class="px-2 text-primary-500">&middot;</span><span>1 word</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">1 min</span>
+  <time datetime="2018-05-23T18:12:11&#43;08:00">2018 May 23</time><span class="px-2 text-primary-500">&middot;</span><span>125 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">1 min</span>
   
 
   
@@ -506,9 +507,29 @@
   
   
   
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/tech/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Tech
+  </span>
+</span>
+  </span>
   
   
   
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/line-bot/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Line-Bot
+  </span>
+</span>
+  </span>
   
   
   
@@ -643,7 +664,55 @@
   
   <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
     
-    
+     <div
+      class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+
+         <details open id="TOCView" class="toc-right mt-0 overflow-y-auto overscroll-contain scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600 rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#建立-line-developer-帳號">建立 Line developer 帳號</a></li>
+    <li><a href="#建立一個-provider">建立一個 provider</a></li>
+    <li><a href="#建立一個-messaging-api">建立一個 Messaging API</a></li>
+    <li><a href="#使用-line-的後台網頁修改機器人的回話內容">使用 Line 的後台網頁修改機器人的回話內容</a></li>
+    <li><a href="#結語">結語</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#建立-line-developer-帳號">建立 Line developer 帳號</a></li>
+    <li><a href="#建立一個-provider">建立一個 provider</a></li>
+    <li><a href="#建立一個-messaging-api">建立一個 Messaging API</a></li>
+    <li><a href="#使用-line-的後台網頁修改機器人的回話內容">使用 Line 的後台網頁修改機器人的回話內容</a></li>
+    <li><a href="#結語">結語</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+<script>
+
+</script>
+   </div>
+      </div>
+      
 
       <div class="min-w-0 min-h-0 max-w-fit">
         
@@ -651,7 +720,484 @@
 
 
         <div class="article-content max-w-prose mb-20">
-          <p>test</p>
+          
+<h2 class="relative group">前言 
+    <div id="前言" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e5%89%8d%e8%a8%80" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>此篇將會介紹如何使用 Line 的網頁去建立一個 LineBot 聊天機器人。不需撰寫任何程式或架設伺服器，只需要動動小手點擊網頁，把屬於你的 LineBot 設定好，就可以跟你做簡單的對話囉！</p>
+<p>開始吧！</p>
+<hr>
+
+<h2 class="relative group">建立 Line developer 帳號 
+    <div id="建立-line-developer-帳號" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e5%bb%ba%e7%ab%8b-line-developer-%e5%b8%b3%e8%99%9f" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>請先開啟 Line developer 網頁<br>
+<a href="https://developers.line.me/en/" target="_blank">https://developers.line.me/en/</a></p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-developer-homepage"
+    srcset="
+      /posts/line-bot-1st/line-developer-homepage_hu_65cacadd2ab8254c.png 330w,
+      /posts/line-bot-1st/line-developer-homepage_hu_c93473db51e69162.png 660w,
+      /posts/line-bot-1st/line-developer-homepage_hu_1b62509c497e7fbd.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-developer-homepage.png"
+    src="/posts/line-bot-1st/line-developer-homepage.png"
+  />
+
+  
+</figure>
+</p>
+<p>接著按右上角的 Log in，登入你的 Line 帳號</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-login"
+    srcset="
+      /posts/line-bot-1st/line-login_hu_91afeae3810d69e7.png 330w,
+      /posts/line-bot-1st/line-login_hu_d94d4ae3df1979d3.png 660w,
+      /posts/line-bot-1st/line-login_hu_817f9316c49969a3.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-login.png"
+    src="/posts/line-bot-1st/line-login.png"
+  />
+
+  
+</figure>
+</p>
+<p>註冊 Developer 帳號</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-register-developer"
+    srcset="
+      /posts/line-bot-1st/line-register-developer_hu_d34860ab96e1a6ed.png 330w,
+      /posts/line-bot-1st/line-register-developer_hu_4e3dfe060bc0824a.png 660w,
+      /posts/line-bot-1st/line-register-developer_hu_5943bf4acb84a7ec.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-register-developer.png"
+    src="/posts/line-bot-1st/line-register-developer.png"
+  />
+
+  
+</figure>
+</p>
+<p>註冊完就成為 Line 的開發者囉！</p>
+<hr>
+
+<h2 class="relative group">建立一個 provider 
+    <div id="建立一個-provider" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e5%bb%ba%e7%ab%8b%e4%b8%80%e5%80%8b-provider" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>按下 Create provider 或是 Add new provider，來建立的頁面</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-create-provider"
+    srcset="
+      /posts/line-bot-1st/line-create-provider_hu_2acc4f7969b1f05e.png 330w,
+      /posts/line-bot-1st/line-create-provider_hu_58a0243599991781.png 660w,
+      /posts/line-bot-1st/line-create-provider_hu_d40f1ac7ae1ee834.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-create-provider.png"
+    src="/posts/line-bot-1st/line-create-provider.png"
+  />
+
+  
+</figure>
+</p>
+<p>輸入你的 provider name 之後按下 Confirm</p>
+<blockquote>
+<p>這邊的 provider name 不是 LineBot 的名字，而是這個 LineBot 的提供者名稱<br>
+例如：IanChiu28 開發了一個聊天機器人-小嘴鳥，那這邊的 provider name 就要填 IanChiu28，然後我們的機器人叫做小嘴鳥唷！</p></blockquote>
+<hr>
+
+<h2 class="relative group">建立一個 Messaging API 
+    <div id="建立一個-messaging-api" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e5%bb%ba%e7%ab%8b%e4%b8%80%e5%80%8b-messaging-api" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>現在你的畫面應該像這個樣子</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-provider-page"
+    srcset="
+      /posts/line-bot-1st/line-provider-page_hu_91582d927fc262f3.png 330w,
+      /posts/line-bot-1st/line-provider-page_hu_5dc0f5110473b49b.png 660w,
+      /posts/line-bot-1st/line-provider-page_hu_76b56eac8ef5db1b.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-provider-page.png"
+    src="/posts/line-bot-1st/line-provider-page.png"
+  />
+
+  
+</figure>
+</p>
+<p>按下右邊的 Messaging API 吧！這就是建立一個機器人的身份囉！</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-create-channel"
+    srcset="
+      /posts/line-bot-1st/line-create-channel_hu_a08b30eb1b97cbb9.png 330w,
+      /posts/line-bot-1st/line-create-channel_hu_eb5bf52220235924.png 660w,
+      /posts/line-bot-1st/line-create-channel_hu_5f9d7a9b93e92ca2.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-create-channel.png"
+    src="/posts/line-bot-1st/line-create-channel.png"
+  />
+
+  
+</figure>
+</p>
+<p>接著我們一步步說明這頁要怎麼填</p>
+<ul>
+<li><strong>App icon</strong>：聊天機器人的大頭照</li>
+<li><strong>App name</strong>：聊天機器人的名字</li>
+<li><strong>App description</strong>：聊天機器人的簡介</li>
+<li><strong>Plan</strong>：選擇 Developer Trail</li>
+</ul>
+<blockquote>
+<p>Developer Trail 才可以用加值功能，雖然朋友數有限制，但是只是玩具少點人用也沒關係啦！</p></blockquote>
+<ul>
+<li><strong>Category</strong>：隨便選一個</li>
+<li><strong>Subcategory</strong>：隨便選一個</li>
+<li><strong>Email address</strong>：填入你的信箱</li>
+</ul>
+<p>完成後大概會像這樣</p>
+<blockquote>
+<p>我怕圖片會有版權問題，小畫家隨便畫一個啦～</p></blockquote>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-finish-channel"
+    srcset="
+      /posts/line-bot-1st/line-finish-channel_hu_c067052a827b4680.png 330w,
+      /posts/line-bot-1st/line-finish-channel_hu_c39cab37ad3ae249.png 660w,
+      /posts/line-bot-1st/line-finish-channel_hu_502ae30a1402ff34.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-finish-channel.png"
+    src="/posts/line-bot-1st/line-finish-channel.png"
+  />
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-bot-qrcode"
+    srcset="
+      /posts/line-bot-1st/line-bot-qrcode_hu_8897059919236397.png 330w,
+      /posts/line-bot-1st/line-bot-qrcode_hu_f0b7c65fbf546f28.png 660w,
+      /posts/line-bot-1st/line-bot-qrcode_hu_433d9a23273f6af0.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-bot-qrcode.png"
+    src="/posts/line-bot-1st/line-bot-qrcode.png"
+  />
+
+  
+</figure>
+</p>
+<p>最後的地方有一個 QR Code 可以讓你用手機加入好友，馬上來掃掃看吧！</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-add-friend"
+    srcset="
+      /posts/line-bot-1st/line-add-friend_hu_208a20995b002570.png 330w,
+      /posts/line-bot-1st/line-add-friend_hu_2b3758fad6f656e9.png 660w,
+      /posts/line-bot-1st/line-add-friend_hu_26cd6947b82b6db5.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-add-friend.png"
+    src="/posts/line-bot-1st/line-add-friend.png"
+  />
+
+  
+</figure>
+</p>
+<p>馬上跟他聊天看看吧！</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-say-hi"
+    srcset="
+      /posts/line-bot-1st/line-say-hi_hu_20428728b28ef349.png 330w,
+      /posts/line-bot-1st/line-say-hi_hu_6311c6fc0b1ca606.png 660w,
+      /posts/line-bot-1st/line-say-hi_hu_d1ef31c062227513.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-say-hi.png"
+    src="/posts/line-bot-1st/line-say-hi.png"
+  />
+
+  
+</figure>
+</p>
+<p>到這邊為止你已經建立你的聊天機器人囉！</p>
+<hr>
+
+<h2 class="relative group">使用 Line 的後台網頁修改機器人的回話內容 
+    <div id="使用-line-的後台網頁修改機器人的回話內容" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e4%bd%bf%e7%94%a8-line-%e7%9a%84%e5%be%8c%e5%8f%b0%e7%b6%b2%e9%a0%81%e4%bf%ae%e6%94%b9%e6%a9%9f%e5%99%a8%e4%ba%ba%e7%9a%84%e5%9b%9e%e8%a9%b1%e5%85%a7%e5%ae%b9" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>我們先回到 Line developer 的網頁，進到你剛剛建立的聊天機器人的設定頁面</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-finish-channel"
+    srcset="
+      /posts/line-bot-1st/line-finish-channel_hu_c067052a827b4680.png 330w,
+      /posts/line-bot-1st/line-finish-channel_hu_c39cab37ad3ae249.png 660w,
+      /posts/line-bot-1st/line-finish-channel_hu_502ae30a1402ff34.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-finish-channel.png"
+    src="/posts/line-bot-1st/line-finish-channel.png"
+  />
+
+  
+</figure>
+</p>
+<p>我們看到最下面 QR Code 的上面一點點的地方，有一個回覆訊息的區塊</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-web-console-set"
+    srcset="
+      /posts/line-bot-1st/line-web-console-set_hu_49600d4fa6d5bfe4.png 330w,
+      /posts/line-bot-1st/line-web-console-set_hu_7c65b1319a8d6167.png 660w,
+      /posts/line-bot-1st/line-web-console-set_hu_6e562533b80d68e5.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-web-console-set.png"
+    src="/posts/line-bot-1st/line-web-console-set.png"
+  />
+
+  
+</figure>
+</p>
+<p>點一下 Set message，會到 Line manager 的頁面</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-web-console-homepage"
+    srcset="
+      /posts/line-bot-1st/line-web-console-homepage_hu_d3cb9a987e8869bd.png 330w,
+      /posts/line-bot-1st/line-web-console-homepage_hu_62d3a0476bd6270.png 660w,
+      /posts/line-bot-1st/line-web-console-homepage_hu_3fac9470cf77eeb6.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-web-console-homepage.png"
+    src="/posts/line-bot-1st/line-web-console-homepage.png"
+  />
+
+  
+</figure>
+</p>
+<p>在這個頁面就可以設定回覆的訊息囉！我們通常會用到的地方是訊息那一個區塊</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-web-console-message"
+    srcset="
+      /posts/line-bot-1st/line-web-console-message_hu_12f4697b64cad8f1.png 330w,
+      /posts/line-bot-1st/line-web-console-message_hu_86f2262296fd5324.png 660w,
+      /posts/line-bot-1st/line-web-console-message_hu_6dc911c61c921fcd.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-web-console-message.png"
+    src="/posts/line-bot-1st/line-web-console-message.png"
+  />
+
+  
+</figure>
+</p>
+<p>接著我們來試試看關鍵字回應訊息</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-web-console-keyword-reply"
+    srcset="
+      /posts/line-bot-1st/line-web-console-keyword-reply_hu_cf1afd33ddb8f7ff.png 330w,
+      /posts/line-bot-1st/line-web-console-keyword-reply_hu_7ccfacab5d4eda3d.png 660w,
+      /posts/line-bot-1st/line-web-console-keyword-reply_hu_4d72312c67906a.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-web-console-keyword-reply.png"
+    src="/posts/line-bot-1st/line-web-console-keyword-reply.png"
+  />
+
+  
+</figure>
+</p>
+<p>按下右上角的新增</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-web-console-keyword-reply-set"
+    srcset="
+      /posts/line-bot-1st/line-web-console-keyword-reply-set_hu_dc7971c1a4990847.png 330w,
+      /posts/line-bot-1st/line-web-console-keyword-reply-set_hu_74eb469a257193f0.png 660w,
+      /posts/line-bot-1st/line-web-console-keyword-reply-set_hu_e88b5dbfc0323372.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-web-console-keyword-reply-set.png"
+    src="/posts/line-bot-1st/line-web-console-keyword-reply-set.png"
+  />
+
+  
+</figure>
+</p>
+<p>在代表關鍵字的地方打上你想要的關鍵字，如果關鍵字有可能多個，可以追加關鍵字<br>
+然後在下方的回覆區塊，可以選擇你想要的回覆方式</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-web-console-keyword-reply-done"
+    srcset="
+      /posts/line-bot-1st/line-web-console-keyword-reply-done_hu_d86ea3bf941bbe5a.png 330w,
+      /posts/line-bot-1st/line-web-console-keyword-reply-done_hu_936e0a8e9d83e75b.png 660w,
+      /posts/line-bot-1st/line-web-console-keyword-reply-done_hu_87d8ff41d4689373.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-web-console-keyword-reply-done.png"
+    src="/posts/line-bot-1st/line-web-console-keyword-reply-done.png"
+  />
+
+  
+</figure>
+</p>
+<p>設定完成，接著趕緊來試試看吧！</p>
+<p>
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md" loading="lazy" decoding="async" fetchpriority="low" alt="line-try-keyword-reply"
+    srcset="
+      /posts/line-bot-1st/line-try-keyword-reply_hu_23860792252f5504.png 330w,
+      /posts/line-bot-1st/line-try-keyword-reply_hu_2c435a8b4d885cc.png 660w,
+      /posts/line-bot-1st/line-try-keyword-reply_hu_a785256d7fb6b1be.png 1280w"
+    data-zoom-src="/posts/line-bot-1st/line-try-keyword-reply.png"
+    src="/posts/line-bot-1st/line-try-keyword-reply.png"
+  />
+
+  
+</figure>
+</p>
+<p>可以看到我們打了關鍵字的話，機器人就會回應你剛剛設定的回覆唷～<br>
+需要注意的是，關鍵字必需要完全符合才可以，向最後一句「安安安」只有部分符合是不會有效果的</p>
+<hr>
+
+<h2 class="relative group">結語 
+    <div id="結語" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e7%b5%90%e8%aa%9e" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>OK～ 我們完成了最基本的聊天機器人囉！<br>
+完全不需要寫任何的程式，只是在網頁上做一些設定，就可以有一個屬於自己的機器人了。但是想跟朋友講垃圾話的話，關鍵字似乎不太符合我們的需求啊！在平常聊天時要完全符合關鍵字實在是太困難了，所以下一篇將會透過程式的方式做到部分符合的關鍵字回覆功能。有興趣的話，請繼續前往下一篇唷～</p>
 
           
           
@@ -752,7 +1298,13 @@
   </footer>
 </article>
 
-      
+      <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top" title="Scroll to top">
+    &uarr;
+  </a>
+</div>
     </main><footer id="site-footer" class="py-10 print:hidden">
   
   
