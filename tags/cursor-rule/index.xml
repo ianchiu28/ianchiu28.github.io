@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cursor-Rule on Ian&#39;s blog</title>
+    <link>https://ianchiu28.github.io/tags/cursor-rule/</link>
+    <description>Recent content in Cursor-Rule on Ian&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>ian.yenchia.chiu@gmail.com (Ian Chiu)</managingEditor>
+    <webMaster>ian.yenchia.chiu@gmail.com (Ian Chiu)</webMaster>
+    <copyright>© 2025 Ian Chiu</copyright>
+    <lastBuildDate>Mon, 23 Jun 2025 22:19:23 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/tags/cursor-rule/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>亂寫 Cursor Rule 讓我的 AI 變笨了</title>
+      <link>https://ianchiu28.github.io/posts/wrong-rule-stupid-ai/</link>
+      <pubDate>Mon, 23 Jun 2025 22:19:23 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/posts/wrong-rule-stupid-ai/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/wrong-rule-stupid-ai/wrong-rule-stupid-ai-cover.png" />
+    </item>
+    
+  </channel>
+</rss>
