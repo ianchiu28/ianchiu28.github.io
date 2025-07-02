@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chat on Ian&#39;s blog</title>
+    <link>https://ianchiu28.github.io/tags/chat/</link>
+    <description>Recent content in Chat on Ian&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>ian.yenchia.chiu@gmail.com (Ian Chiu)</managingEditor>
+    <webMaster>ian.yenchia.chiu@gmail.com (Ian Chiu)</webMaster>
+    <copyright>© 2025 Ian Chiu</copyright>
+    <lastBuildDate>Wed, 02 Jul 2025 22:11:00 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/tags/chat/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>跳巢到 Brave 瀏覽器</title>
+      <link>https://ianchiu28.github.io/posts/move-to-brave-browser/</link>
+      <pubDate>Wed, 02 Jul 2025 22:11:00 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/posts/move-to-brave-browser/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/move-to-brave-browser/move-to-brave-browser-cover.png" />
+    </item>
+    
+  </channel>
+</rss>
