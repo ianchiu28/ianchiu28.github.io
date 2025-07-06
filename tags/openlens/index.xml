@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Openlens on Ian&#39;s blog</title>
+    <link>https://ianchiu28.github.io/tags/openlens/</link>
+    <description>Recent content in Openlens on Ian&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>ian.yenchia.chiu@gmail.com (Ian Chiu)</managingEditor>
+    <webMaster>ian.yenchia.chiu@gmail.com (Ian Chiu)</webMaster>
+    <copyright>© 2025 Ian Chiu</copyright>
+    <lastBuildDate>Sun, 06 Jul 2025 21:37:57 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/tags/openlens/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>OpenLens 安裝插件 Pod Shell &amp; Log</title>
+      <link>https://ianchiu28.github.io/posts/openlens-extension-pod-menu/</link>
+      <pubDate>Sun, 06 Jul 2025 21:37:57 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/posts/openlens-extension-pod-menu/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/openlens-extension-pod-menu/openlens-extension-pod-menu-cover.png" />
+    </item>
+    
+  </channel>
+</rss>

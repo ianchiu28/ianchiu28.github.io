@@ -4,13 +4,19 @@
 
   <url>
     <loc>https://ianchiu28.github.io/</loc>
-    <lastmod>2025-07-02T22:11:00+08:00</lastmod>
+    <lastmod>2025-07-06T21:37:57+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ianchiu28.github.io/posts/openlens-extension-pod-menu/</loc>
+    <lastmod>2025-07-06T21:37:57+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ianchiu28.github.io/posts/</loc>
-    <lastmod>2025-07-02T22:11:00+08:00</lastmod>
+    <lastmod>2025-07-06T21:37:57+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
