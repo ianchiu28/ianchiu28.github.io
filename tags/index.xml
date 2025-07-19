@@ -9,7 +9,17 @@
     <managingEditor>ian.yenchia.chiu@gmail.com (Ian Chiu)</managingEditor>
     <webMaster>ian.yenchia.chiu@gmail.com (Ian Chiu)</webMaster>
     <copyright>© 2025 Ian Chiu</copyright>
-    <lastBuildDate>Sun, 06 Jul 2025 21:37:57 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Jul 2025 21:11:33 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Git</title>
+      <link>https://ianchiu28.github.io/tags/git/</link>
+      <pubDate>Sat, 19 Jul 2025 21:11:33 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/tags/git/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>Openlens</title>

@@ -9,7 +9,17 @@
     <managingEditor>ian.yenchia.chiu@gmail.com (Ian Chiu)</managingEditor>
     <webMaster>ian.yenchia.chiu@gmail.com (Ian Chiu)</webMaster>
     <copyright>© 2025 Ian Chiu</copyright>
-    <lastBuildDate>Sun, 06 Jul 2025 21:37:57 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Jul 2025 21:11:33 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Git Ignore 的幾種做法</title>
+      <link>https://ianchiu28.github.io/posts/git-ignore/</link>
+      <pubDate>Sat, 19 Jul 2025 21:11:33 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/posts/git-ignore/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/git-ignore/git-ignore-cover.png" />
+    </item>
     
     <item>
       <title>OpenLens 安裝插件 Pod Shell &amp; Log</title>
