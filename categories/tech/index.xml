@@ -9,7 +9,17 @@
     <managingEditor>ian.yenchia.chiu@gmail.com (Ian Chiu)</managingEditor>
     <webMaster>ian.yenchia.chiu@gmail.com (Ian Chiu)</webMaster>
     <copyright>© 2025 Ian Chiu</copyright>
-    <lastBuildDate>Sun, 20 Jul 2025 20:56:43 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Aug 2025 17:15:16 +0800</lastBuildDate><atom:link href="https://ianchiu28.github.io/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Git skip-worktree 忽略已追蹤的檔案修改</title>
+      <link>https://ianchiu28.github.io/posts/git-ignore-tracked-files/</link>
+      <pubDate>Sun, 17 Aug 2025 17:15:16 +0800</pubDate>
+      <author>ian.yenchia.chiu@gmail.com (Ian Chiu)</author>
+      <guid>https://ianchiu28.github.io/posts/git-ignore-tracked-files/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://ianchiu28.github.io/posts/git-ignore-tracked-files/git-ignore-tracked-files-cover.png" />
+    </item>
     
     <item>
       <title>在 Hugo 安裝 Google Analytics</title>
